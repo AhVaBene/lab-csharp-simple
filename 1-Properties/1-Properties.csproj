@@ -25,4 +25,8 @@
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Libreria\Libreria.csproj" />
+  </ItemGroup>
+
 </Project>

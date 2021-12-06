@@ -1,3 +1,4 @@
+using System;
 namespace ComplexAlgebra
 {
     /// <summary>
@@ -18,5 +19,30 @@ namespace ComplexAlgebra
     public class Complex
     {
         // TODO: fill this class\
+        private double _real;
+        private double _imaginary;
+        
+        public Complex(double real, double imaginary)
+        {
+            _real = real;
+            _imaginary = imaginary;
+        }
+        public double Real { get=>_real; }
+        public double Imaginary { get=>_imaginary; }
+        public double Modulus => Math.Sqrt(Math.Pow(Real, 2) + Math.Pow(Imaginary, 2));
+        public double Phase => Math.Atan2(Imaginary, Real);
+        public Complex Complement => new Complex(Real, -Imaginary);
+        public Complex Sum(Complex add) => new Complex(Real + add.Real, Imaginary + add.Imaginary);
+        public Complex Diff(Complex sub) => new Complex(Real - sub.Real, Imaginary - sub.Imaginary);
+        public override string ToString() => Imaginary > 0 ? Real + " + " + Imaginary +"i" : Real + " " + Imaginary + "i";
+        private bool Equals(Complex num) => (Real.Equals(num.Real) && Imaginary.Equals(num.Imaginary));
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return (this.Equals((Complex)obj));
+        }
+        public override int GetHashCode() => HashCode.Combine(Real, Imaginary);
     }
 }
